@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The TLE Chronicles</title>
+
+  <!-- Bulma CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+
+      <!-- Titel -->
+      <h1 class="title has-text-centered">The Be Aware Series</h1>
+
+      <!-- Introductie -->
+      <div class="content " style="max-width: auto; margin: 0 auto; margin-bottom: 3rem;">
+        <p style="color:#c5c6c7; font-size:1.1rem;">
+          The Be Aware Series is een doorlopend, persoonlijk project dat mijn weg door de TLE's vastlegt. Elke titel toont een andere fase van bewustwording: over wat ik zie, wat mij omringt, wat ik creëer en wie ik word tijdens dat proces.
+          Deze serie is geen traditioneel verhaal, maar een groeiend universum waarin ik ontdek wat ik allemaal kan bouwen — technisch, creatief en conceptueel. Het volgt mijn ontwikkeling, mijn perspectieven, en de werelden die ik daaruit vormgeef.
+          Elk boek in deze serie is een momentopname van mijn reis als student. Terwijl ik leer en groei, evolueert ook deze collectie. Nieuwe titels zullen verschijnen naarmate ik nieuwe inzichten opdoe en nieuwe vaardigheden ontwikkel.
+      </div>
+
+      <!-- Boekenkast -->
+      <div class="boekenkast columns is-multiline" id="boekenkast"></div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div id="boek-modal" class="boek-modal">
+    <div class="boek-modal-content">
+      <div id="boek-content" class="boek-scroll"></div>
+    </div>
+    <button class="boek-modal-close">&times;</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+/* Basis tekst – leesbaar */
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0b0c10;
+  color: #c5c6c7;
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+/* Serie titel */
+h1.title {
+  font-family: 'Orbitron', sans-serif;
+  color: #66fcf1;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 10px #66fcf1;
+}
+
+/* Hoofdstuktitels */
+.chapter h2 {
+  font-family: 'Orbitron', sans-serif;
+  color: #66fcf1;
+  margin-bottom: 1rem;
+}
+
+/* Subkoppen */
+.chapter h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  color: #e5e5e5;
+  margin-top: 1.5rem;
+}
+
+/* Verhalende tekst */
+.chapter p,
+.chapter li {
+  font-family: 'Inter', sans-serif;
+  max-width: 65ch; /* optimaal leesbaar */
+}
+
+/* Intro en outro iets lichter */
+.chapter .intro,
+.chapter .outro {
+  color: #aab0b6;
+  font-style: italic;
+}
+
+/* Boekenkast layout blijft hetzelfde */
+.boekenkast {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start; 
+  margin: 0 auto;
+  max-width: auto; 
+}
+
+.chapter {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Boek kaarten groter maken */
+.card.boek {
+  width: 260px;
+  background: linear-gradient(145deg,#1f2833,#0b0c10);
+  border: 2px solid #45a29e;
+  box-shadow: 0 0 20px #45a29e;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.5s, box-shadow 0.5s;
+}
+
+.card.boek:hover {
+  transform: scale(1.08) rotateY(10deg);
+  box-shadow: 0 0 50px #66fcf1, 0 0 80px #45a29e;
+}
+
+/* Boek cover afbeelding */
+.card-image img {
+  width: 100%;
+  display: block;
+  height: auto;
+}
+
+/* Boek titel groter */
+.card-content p.title {
+  font-size: 1.1rem;
+  text-align: center;
+  margin-top: 0.5rem;
+  color: #66fcf1;
+  text-shadow: 0 0 5px #66fcf1;
+}
+
+/* Modal */
+.boek-modal {
+  position: fixed;
+  top:0; left:0; width:100%; height:100%;
+  display:none;
+  justify-content:center; align-items:center;
+  background: rgba(0,0,0,0.95);
+  z-index: 100;
+}
+
+.boek-modal.active {
+  display:flex;
+}
+
+/* Modal container */
+.boek-modal-content {
+  background: #0b0c10;
+  border: 3px solid #45a29e;
+  box-shadow: 0 0 50px #66fcf1;
+  width: 90%;
+  max-width: 700px;
+  max-height: 85vh; /* voorkomt scherm-overflow */
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+
+@keyframes openBook {
+  from { transform: rotateY(-180deg) scale(0);}
+  to { transform: rotateY(0deg) scale(1);}
+}
+
+/* Scrollbare inhoud */
+.boek-scroll {
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  flex-grow: 1; /* vult beschikbare hoogte */
+}
+
+/* Mooie scrollbar (optioneel maar professioneel) */
+.boek-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.boek-scroll::-webkit-scrollbar-thumb {
+  background: #45a29e;
+  border-radius: 10px;
+}
+.boek-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Navigatie blijft vast */
+.boek-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #45a29e;
+}
+
+/* Modal close knop */
+.boek-modal-close {
+  position: absolute;
+  top:10px;
+  right:20px;
+  font-size:2rem;
+  background:none;
+  border:none;
+  color:#66fcf1;
+  cursor:pointer;
+}
+
+.boek-modal-close:hover {
+  color:white;
+}
+
+/* Disabled boeken */
+.card.boek.disabled {
+  filter: grayscale(80%);
+  cursor: default;
+  box-shadow: 0 0 5px #666;
+}
+
+.card.boek.disabled:hover {
+  transform: none;
+  box-shadow: 0 0 5px #666;
+}
+
+.boek-modal-content .chapter {
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid #45a29e;
+}
+
+.boek-modal-content .chapter h2 {
+  color: #66fcf1;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.boek-modal-content .chapter p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+#nav-buttons button {
+  min-width: 120px;
+}
+
