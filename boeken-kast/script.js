@@ -1,16 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
   const boekenData = [
-    { id:'boek1', titel:'Be aware of the Watching Eye - TLE 1', author: 'R.J. Genegel', disabled:false },
-    { id:'boek2', titel:'Be aware of the Surroundings - TLE 2', author: 'R.J. Genegel', disabled:false },
-    { id:'boek4', titel:'To be released: April 2026 - TLE 3', author: 'R.J. Genegel', disabled:true },
-    { id:'boek5', titel:'To be released: June 2026 - TLE 4', author: 'R.J. Genegel', disabled:true },
-    { id:'boek3', titel:'Be aware of the Assessed - Assesment 1', author: 'R.J. Genegel', disabled:false },
-    { id:'boek6', titel:'To be released: June 2026 - Assesment 2', author: 'R.J. Genegel', disabled:true }
+    { id:'boek1', titel:'Be aware of the Watching Eye - TLE 1', disabled:false },
+    { id:'boek2', titel:'Be aware of the Surroundings - TLE 2', disabled:false },
+    { id:'boek4', titel:'To be released: April 2026 - TLE 3', disabled:true },
+    { id:'boek5', titel:'To be released: June 2026 - TLE 4', disabled:true },
+    { id:'boek3', titel:'Be aware of the Assessed - Assesment 1 Novel', disabled:false },
+    { id:'boek6', titel:'To be released: June 2026 - Assesment 2 Novel', disabled:true }
   ];
 
   const boekenkast = document.getElementById('boekenkast');
 
-  // Boekenkast renderen
   boekenData.forEach(b => {
     const col = document.createElement('div');
     col.className = 'column is-one-quarter';
@@ -27,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
       <div class="card-content">
         <p class="title is-5">${b.titel}</p>
-        <p class="title is-5">${b.author}</p>
       </div>
     `;
 
@@ -35,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
     boekenkast.appendChild(col);
   });
 
-  // Modal setup
   const modal = document.getElementById('boek-modal');
   const modalContent = document.getElementById('boek-content');
   let currentBoekId = '';
@@ -48,59 +45,64 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
   `;
 
+  function hoofdstukBestaat(boekId, hoofdstukIndex) {
+    return fetch(`${boekId}/h${hoofdstukIndex}.html`, { method: 'HEAD' })
+      .then(res => res.ok)
+      .catch(() => false);
+  }
+
   function loadHoofdstuk(boekId, hoofdstukIndex){
-  fetch(`${boekId}/${boekId}-h${hoofdstukIndex}.html`)
-    .then(res => {
-      if (!res.ok) throw new Error('Hoofdstuk bestaat niet');
-      return res.text();
-    })
-    .then(data => {
-      modalContent.innerHTML = data + navHtml;
-    })
-    .catch(() => {
-      modalContent.innerHTML = `
-        <div class="chapter">
-          <h2>Hoofdstuk niet beschikbaar</h2>
-          <p>Dit hoofdstuk is nog in ontwikkeling.</p>
-        </div>
-        ${navHtml}
-      `;
-    });
-}
+    fetch(`${boekId}/h${hoofdstukIndex}.html`)
+      .then(res => {
+        if (!res.ok) throw new Error('Hoofdstuk bestaat niet');
+        return res.text();
+      })
+      .then(data => {
+        modalContent.innerHTML = data + navHtml;
+      })
+      .catch(() => {
+        modalContent.innerHTML = `
+          <div class="chapter">
+            <h2>Hoofdstuk niet beschikbaar</h2>
+            <p>Dit hoofdstuk is nog in ontwikkeling.</p>
+          </div>
+          ${navHtml}
+        `;
+      });
+  }
 
-
-  // Klik op boek
   document.querySelectorAll('.card.boek:not(.disabled)').forEach(card => {
     card.addEventListener('click', ()=>{
       currentBoekId = card.dataset.id;
-      currentHoofdstuk = 0; // start bij Intro
+      currentHoofdstuk = 0;
       modal.classList.add('active');
       loadHoofdstuk(currentBoekId, currentHoofdstuk);
     });
   });
 
-  // Sluit modal
   document.querySelector('.boek-modal-close').addEventListener('click', ()=>{
     modal.classList.remove('active');
   });
 
   modal.addEventListener('click', (e) => {
-  if (e.target === modal) { // alleen als de klik op de achtergrond is
-    modal.classList.remove('active');
-  }
-});
+    if (e.target === modal) {
+      modal.classList.remove('active');
+    }
+  });
 
-  // Navigatie
-  document.addEventListener('click', e=>{
-    if(e.target.id === 'next-hoofdstuk'){
-      if(currentHoofdstuk < 10){
-        currentHoofdstuk++;
+  document.addEventListener('click', async e => {
+    if (e.target.id === 'next-hoofdstuk') {
+      const volgende = currentHoofdstuk + 1;
+      if (await hoofdstukBestaat(currentBoekId, volgende)) {
+        currentHoofdstuk = volgende;
         loadHoofdstuk(currentBoekId, currentHoofdstuk);
       }
     }
-    if(e.target.id === 'prev-hoofdstuk'){
-      if(currentHoofdstuk > 0){
-        currentHoofdstuk--;
+
+    if (e.target.id === 'prev-hoofdstuk') {
+      const vorige = currentHoofdstuk - 1;
+      if (vorige >= 0 && await hoofdstukBestaat(currentBoekId, vorige)) {
+        currentHoofdstuk = vorige;
         loadHoofdstuk(currentBoekId, currentHoofdstuk);
       }
     }
