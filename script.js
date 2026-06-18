@@ -2,10 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const boekenData = [
     { id:'boek1', titel:'Be aware of the Watching Eye - TLE 1', disabled:false },
     { id:'boek2', titel:'Be aware of the Surroundings - TLE 2', disabled:false },
-    { id:'boek4', titel:'To be released: April 2026 - TLE 3', disabled:true },
-    { id:'boek5', titel:'To be released: June 2026 - TLE 4', disabled:true },
+    { id:'boek4', titel:'Be aware of the Artificial Intelligence - TLE 3', disabled:false },
+    { id:'boek5', titel:'Be aware of the Neighbourhood Safety - TLE 4', disabled:false },
     { id:'boek3', titel:'Be aware of the Assessed - Assesment 1 Novel', disabled:false },
-    { id:'boek6', titel:'To be released: June 2026 - Assesment 2 Novel', disabled:true }
+    { id:'boek6', titel:'Be aware of the Assessed - Assesment 2 Novel', disabled:false }
   ];
 
   const boekenkast = document.getElementById('boekenkast');

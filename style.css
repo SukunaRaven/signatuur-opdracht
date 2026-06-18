@@ -2,8 +2,8 @@ body {
   font-family: 'Inter', sans-serif;
   background: #0b0c10;
   color: #c5c6c7;
-  line-height: 1.7;
-  font-size: 16px;
+  line-height: 1.8;
+  font-size: 18px;
 }
 
 h1.title {
@@ -29,7 +29,7 @@ h1.title {
 .chapter p,
 .chapter li {
   font-family: 'Inter', sans-serif;
-  max-width: 65ch; 
+  max-width: 80ch;
 }
 
 .chapter .intro,
@@ -42,9 +42,9 @@ h1.title {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: flex-start; 
+  align-items: flex-start;
   margin: 0 auto;
-  max-width: auto; 
+  max-width: auto;
 }
 
 .chapter {
@@ -57,7 +57,7 @@ h1.title {
 }
 
 .card.boek {
-  width: 300px;
+  width: 450px;
   background: linear-gradient(145deg,#1f2833,#0b0c10);
   border: 2px solid #45a29e;
   box-shadow: 0 0 20px #45a29e;
@@ -102,12 +102,12 @@ h1.title {
   background: #0b0c10;
   border: 3px solid #45a29e;
   box-shadow: 0 0 50px #66fcf1;
-  width: 90%;
-  max-width: 700px;
-  max-height: 85vh; 
+  width: 95%;
+  max-width: 1000px;
+  max-height: 90vh;
   display: flex;
   flex-direction: column;
-  padding: 1.5rem;
+  padding: 2.5rem;
 }
 
 @keyframes openBook {
@@ -118,7 +118,7 @@ h1.title {
 .boek-scroll {
   overflow-y: auto;
   padding-right: 0.5rem;
-  flex-grow: 1; 
+  flex-grow: 1;
 }
 
 .boek-scroll::-webkit-scrollbar {
@@ -174,15 +174,15 @@ h1.title {
 
 .boek-modal-content .chapter h2 {
   color: #66fcf1;
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  margin-bottom: 1rem;
 }
+
 .boek-modal-content .chapter p {
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1.15rem;
+  line-height: 1.7;
 }
 
 #nav-buttons button {
   min-width: 120px;
 }
-
